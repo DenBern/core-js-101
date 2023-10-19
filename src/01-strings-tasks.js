@@ -179,9 +179,11 @@ const extractEmails = (str) => str.split(';');
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
-}
+const getRectangleString = (width, height) => {
+  const createAllRows = (lenghtRow, currentStr) => Array(lenghtRow - 2).fill(currentStr).join('');
+  const centralRows = `${createAllRows(height, `│${createAllRows(width, ' ')}│\n`)}`;
+  return `┌${createAllRows(width, '─')}┐\n${centralRows}└${createAllRows(width, '─')}┘\n`;
+};
 
 
 /**

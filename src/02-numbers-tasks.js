@@ -48,6 +48,7 @@ const getCircleCircumference = (radius) => (2 * Math.PI) * radius;
  *  -3, 3  => 0
  */
 const getAverage = (/* value1, value2 */) => {
+  throw new Error('Not implemented');
 };
 
 /**

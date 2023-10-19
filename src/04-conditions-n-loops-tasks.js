@@ -30,8 +30,6 @@
 function getFizzBuzz(/* num */) {
   throw new Error('Not implemented');
 }
-
-
 /**
  * Returns the factorial of the specified integer n.
  *
@@ -43,9 +41,8 @@ function getFizzBuzz(/* num */) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
-}
+const getFactorial = (n) => Array.from({ length: n },
+  (_, index) => index + 1).reduce((acc, value) => acc * value);
 
 
 /**
@@ -60,9 +57,8 @@ function getFactorial(/* n */) {
  *   5,10  =>  45 ( = 5+6+7+8+9+10 )
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
-function getSumBetweenNumbers(/* n1, n2 */) {
-  throw new Error('Not implemented');
-}
+const getSumBetweenNumbers = (n1, n2) => Array.from({ length: n2 - n1 + 1 },
+  (_, index) => n1 + index).reduce((acc, value) => acc + value);
 
 
 /**
@@ -80,9 +76,7 @@ function getSumBetweenNumbers(/* n1, n2 */) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
-}
+const isTriangle = (a, b, c) => a + b > c && a + c > b && b + c > a;
 
 
 /**
@@ -148,10 +142,10 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
-}
-
+const isInsideCircle = (circle, point) => {
+  const distanceSquared = (point.x - circle.center.x) ** 2 + (point.y - circle.center.y) ** 2;
+  return distanceSquared < circle.radius ** 2;
+};
 
 /**
  * Returns the first non repeated char in the specified strings otherwise returns null.
@@ -164,10 +158,9 @@ function isInsideCircle(/* circle, point */) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
+const findFirstSingleChar = (/* str */) => {
   throw new Error('Not implemented');
-}
-
+};
 
 /**
  * Returns the string representation of math interval,
@@ -191,9 +184,12 @@ function findFirstSingleChar(/* str */) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
-}
+const getIntervalString = (a, b, isStartIncluded, isEndIncluded) => {
+  const start = isStartIncluded ? '[' : '(';
+  const end = isEndIncluded ? ']' : ')';
+  const nums = a < b ? `${a}, ${b}` : `${b}, ${a}`;
+  return start + nums + end;
+};
 
 
 /**
@@ -208,9 +204,7 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
-}
+const reverseString = (str) => str.split('').reverse().join('');
 
 
 /**
@@ -225,9 +219,7 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
-}
+const reverseInteger = (num) => num.toString().split('').reverse().join('');
 
 
 /**
@@ -250,9 +242,10 @@ function reverseInteger(/* num */) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
-}
+const isCreditCardNumber = (ccn) => Boolean(!(ccn.toString().split('').reverse()
+  .map((num, index) => (index % 2 !== 0 ? +num * 2 : +num))
+  .map((num) => (num > 9 ? (num - 9) : num))
+  .reduce((acc, val) => acc + val) % 10));
 
 /**
  * Returns the digital root of integer:
@@ -268,9 +261,11 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
-}
+const getDigitalRoot = (num) => num.toString()
+  .split('')
+  .reduce((acc, value) => +acc + +value).toString()
+  .split('')
+  .reduce((acc, value) => +acc + +value);
 
 
 /**
@@ -294,9 +289,9 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
+const isBracketsBalanced = (/* str */) => {
   throw new Error('Not implemented');
-}
+};
 
 
 /**
@@ -319,9 +314,7 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
-}
+const toNaryString = (num, n) => (num).toString(n);
 
 
 /**
