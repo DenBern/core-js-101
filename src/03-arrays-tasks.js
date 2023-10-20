@@ -175,9 +175,7 @@ const getTail = (arr, n) => arr.splice(arr.length - n, arr.length);
  *    +'20,21,22,23,24\n'
  *    +'30,31,32,33,34'
  */
-function toCsvText(/* arr */) {
-  throw new Error('Not implemented');
-}
+const toCsvText = (arr) => arr.join('\n');
 
 /**
  * Transforms the numeric array into the according array of squares:
@@ -206,9 +204,11 @@ const toArrayOfSquares = (arr) => arr.map((counter) => counter ** 2);
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
-}
+const getMovingSum = (arr) => {
+  const res = [];
+  arr.map((_, index) => res.push(index ? arr[index] + res[index - 1] : arr[index]));
+  return res;
+};
 
 /**
  * Returns every second item from the specified array:
@@ -238,9 +238,11 @@ const getSecondItems = (arr) => arr.filter((_, index) => index % 2);
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
-}
+const propagateItemsByPositionIndex = (arr) => {
+  const res = [];
+  arr.map((item, index) => res.push(...Array(index + 1).fill(item)));
+  return res;
+};
 
 
 /**
@@ -287,8 +289,9 @@ const getPositivesCount = (arr) => (!arr.length ? 0 : arr.filter((item) => item 
  *   [ 'nine','eight','nine','eight'] => [ 'eight','eight','nine','nine']
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
-const sortDigitNamesByNumericOrder = (/* arr */) => {
-  throw new Error('Not implemented');
+const sortDigitNamesByNumericOrder = (arr) => {
+  const digits = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+  return arr.sort((a, b) => digits.indexOf(a) - digits.indexOf(b));
 };
 
 /**
@@ -318,9 +321,7 @@ const getItemsSum = (arr) => arr.reduce((acc, value) => acc + value, 0);
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
-}
+const getFalsyValuesCount = (arr) => arr.filter((item) => !item).length;
 
 
 /**
@@ -401,9 +402,11 @@ const sortCitiesArray = (arr) => arr.sort((a, b) => (a.city < b.city ? 1 : -1))
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
-}
+const getIdentityMatrix = (n) => {
+  const res = Array.from({ length: n }, () => Array(n).fill(0));
+  res.map((_, index) => res[index].splice(index, 1, 1));
+  return res;
+};
 
 /**
  * Creates an array of integers from the specified start to end (inclusive)
