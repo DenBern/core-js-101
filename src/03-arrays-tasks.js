@@ -402,11 +402,8 @@ const sortCitiesArray = (arr) => arr.sort((a, b) => (a.city < b.city ? 1 : -1))
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-const getIdentityMatrix = (n) => {
-  const res = Array.from({ length: n }, () => Array(n).fill(0));
-  res.map((_, index) => res[index].splice(index, 1, 1));
-  return res;
-};
+const getIdentityMatrix = (n) => Array.from({ length: n }, (_, index) => Array(n).fill(0)
+  .map((value, subIndex) => (index === subIndex ? 1 : value)));
 
 /**
  * Creates an array of integers from the specified start to end (inclusive)
