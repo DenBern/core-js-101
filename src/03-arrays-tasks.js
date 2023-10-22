@@ -473,7 +473,6 @@ const group = (array, keySelector, valueSelector) => {
     acc[key].push(valueSelector(value));
     return acc;
   }, {})));
-
   return result;
 };
 

@@ -27,9 +27,12 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
-}
+const getFizzBuzz = (num) => {
+  if (num % 3 === 0 && num % 5 === 0) return 'FizzBuzz';
+  if (num % 3 === 0) return 'Fizz';
+  if (num % 5 === 0) return 'Buzz';
+  return num;
+};
 /**
  * Returns the factorial of the specified integer n.
  *
@@ -111,9 +114,16 @@ const isTriangle = (a, b, c) => a + b > c && a + c > b && b + c > a;
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
-}
+const doRectanglesOverlap = (rect1, rect2) => {
+  const rightPointWidth1 = rect1.left + rect1.width;
+  const rightPointHeight1 = rect1.top + rect1.height;
+  const rightPointWidth2 = rect2.left + rect2.width;
+  const rightPointHeight2 = rect2.top + rect2.height;
+
+  if (rightPointWidth1 <= rect2.left || rightPointWidth2 <= rect1.left) return false;
+  if (rightPointHeight1 <= rect2.top || rightPointHeight2 <= rect1.top) return false;
+  return true;
+};
 
 
 /**
@@ -158,8 +168,9 @@ const isInsideCircle = (circle, point) => {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-const findFirstSingleChar = (/* str */) => {
-  throw new Error('Not implemented');
+const findFirstSingleChar = (str) => {
+  const arrStr = str.split('');
+  return arrStr.find((item) => str.indexOf(item) === str.lastIndexOf(item));
 };
 
 /**
@@ -289,8 +300,23 @@ const getDigitalRoot = (num) => num.toString()
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-const isBracketsBalanced = (/* str */) => {
-  throw new Error('Not implemented');
+const isBracketsBalanced = (str) => {
+  const res = [];
+  const arrStr = str.split('');
+  const bracketsOpened = ['<', '{', '(', '['];
+  const bracketsClosed = ['>', '}', ')', ']'];
+  for (let i = 0; i < arrStr.length; i += 1) {
+    if (bracketsOpened.includes(arrStr[i])) {
+      res.push(arrStr[i]);
+    } else if (bracketsClosed.includes(arrStr[i])) {
+      if (bracketsOpened.indexOf(res[res.length - 1]) === bracketsClosed.indexOf(arrStr[i])) {
+        res.pop();
+      } else {
+        return false;
+      }
+    }
+  }
+  return res.length === 0;
 };
 
 
@@ -329,9 +355,21 @@ const toNaryString = (num, n) => (num).toString(n);
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
-}
+const getCommonDirectoryPath = (pathes) => {
+  const res = [];
+  const firstPath = pathes[0].split('/');
+  for (let i = 0; i < firstPath.length; i += 1) {
+    let arr = [];
+    for (let j = 0; j < pathes.length; j += 1) {
+      const nextPath = pathes[j].split('/');
+      arr.push(nextPath[i]);
+    }
+    arr = [...new Set(arr)];
+    if (arr.length > 1) return res.join('');
+    res.push(arr[0], '/');
+  }
+  return res.join('/');
+};
 
 
 /**
@@ -352,9 +390,19 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
-}
+const getMatrixProduct = (m1, m2) => {
+  const resMatrix = [];
+  let row = [];
+  for (let i = 0; i < m1.length; i += 1) {
+    for (let j = 0; j < m2.length; j += 1) {
+      const item = m1[i][0] * m2[0][j] + m1[i][1] * m2[1][j] + m1[i][2] * m2[2][j];
+      if (item) row[j] = item;
+    }
+    resMatrix.push(row);
+    row = [];
+  }
+  return resMatrix;
+};
 
 
 /**
@@ -387,9 +435,42 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
-}
+const evaluateTicTacToePosition = (position) => {
+  for (let i = 0; i < 3; i += 1) {
+    // Rows
+    if (
+      position[i][0] === position[i][1]
+      && position[i][1] === position[i][2]
+      && position[i][0] !== undefined
+    ) {
+      return position[i][0];
+    }
+    // Columns
+    if (
+      position[0][i] === position[1][i]
+      && position[1][i] === position[2][i]
+      && position[0][i] !== undefined
+    ) {
+      return position[0][i];
+    }
+  }
+  // Diagonals
+  if (
+    position[0][0] === position[1][1]
+    && position[1][1] === position[2][2]
+    && position[0][0] !== undefined
+  ) {
+    return position[0][0];
+  }
+  if (
+    position[0][2] === position[1][1]
+    && position[1][1] === position[2][0]
+    && position[0][2] !== undefined
+  ) {
+    return position[0][2];
+  }
+  return undefined;
+};
 
 
 module.exports = {
